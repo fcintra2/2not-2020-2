@@ -105,6 +105,52 @@
             console.log('Não existe')
         }
 
+        console.log(frutas)
+        alert(frutas)               // Dá certo, mas não é bonito
+        document.write(frutas)      // Dá certo, mas não é bonito
+
+        /* slice(): "fatia" um vetor, gerando um outro vetor apenas com o 
+            pedaço desejado
+            Parâmetros:
+            1º: posição inicial (incluída)
+            2º: posição final (NÃO É INCLUÍDA)
+        */
+        let parte = frutas.slice(1, 4)
+        console.log(frutas)
+        console.log(parte)
+
+        // Quando chamado com apenas um parâmetro, a fatia inclui daquela posição
+        // até o final do vetor
+        let outraParte = frutas.slice(3)
+        console.log(outraParte)
+
+        // Acessando posições do vetor
+        // A fruta que está na terceira posição
+        console.log(frutas[2])
+
+        // A primeira fruta
+        console.log(frutas[0])
+
+        // A última fruta
+        console.log(frutas[frutas.length - 1])  
+
+        console.log('-----------------------------')
+
+        // Percurso na ordem crescente
+        let i
+        for(i = 0; i < frutas.length; i++) {
+            console.log(frutas[i])
+        }
+        console.log('Valor final de i:', i)
+
+        console.log('-----------------------------')
+
+        // Percurso na ordem decrescente
+        for(let i = frutas.length - 1; i >= 0; i--) {
+            console.log(frutas[i])
+        }
+
+        // Faltam os métodos de percurso: forEach() e for..of        
 
     </script>
 </head>
