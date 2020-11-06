@@ -150,7 +150,31 @@
             console.log(frutas[i])
         }
 
-        // Faltam os métodos de percurso: forEach() e for..of        
+        console.log('-----------------------------')
+
+        /* PERCURSO USANDO O LOOP for..of 
+            1) SEMPRE percorre TODOS os elementos, do primeiro ao último
+            2) NÃO é possível usá-lo para percorrer na ordem descrescente
+        */
+        // frutas (plural) é o vetor
+        // fruta (singular) é uma variável que, a cada iteração do loop,
+        // receberá o valor de um dos elementos do vetor, na ordem.
+        // Essa variável pode ter QUALQUER nome válido
+        for(let fruta of frutas) {
+            console.log(fruta)
+        }      
+
+        console.log('forEach: -----------------------------')
+
+        /* PERCURSO USANDO forEach() 
+            forEach() é uma FUNÇÃO que todos os vetores têm
+            e que espera, como parâmetro, outra FUNÇÃO que
+            recebe um outro parâmetro, que contém cada um dos
+            elementos do vetor
+        */
+        frutas.forEach(function(x) {
+            console.log(x)
+        })
 
     </script>
 </head>
