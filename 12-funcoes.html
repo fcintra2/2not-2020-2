@@ -33,17 +33,185 @@
         
         // Chamadas de função podem vir antes da declaração da função
         let x = soma(15, 19)
-        alert(x)
+        //alert(x)
 
-        alert(soma(12.5, 89.5))
+        //alert(soma(12.5, 89.5))
 
         let a = 45.75, b = 67.15
-        alert(soma(a, b))
+        //alert(soma(a, b))
 
         // Declaração da função
         function soma(n1, n2) {
             return n1 + n2
         }
+
+        // Função com UM parâmetro
+        function fatorial(num) {
+            // O fatorial de um número é igual a ele próprio multiplicado
+            // pelos seus antecessores até 1
+            // 5! = 5 * 4 * 3 * 2 (120)
+            let fat = 1     // Elemento neutro da multiplicação
+            for(let i = num; i > 1; i--) { // 5 4 3 2
+                fat *= i    // fat = fat * i
+            }
+            return fat
+        }
+
+        // Chamadas de função feita dentro de string templates
+        document.write(`5! é igual a ${fatorial(5)}<br>`)
+        document.write(`9! é igual a ${fatorial(9)}<br>`)
+        let res = fatorial(6)
+        document.write(`6! é igual a ${res}<br>`)
+
+        /**********************************************************
+        FUNÇÃO SEM VALOR DE RETORNO
+        **********************************************************/
+        // Algumas funções desempenham tarefas mas não retornam um
+        // resultado ao final
+        function traco(tamanho) {
+            for(let i = 1; i <= tamanho; i++) {
+                document.write('-')
+            }
+            document.write('<br>')
+        }
+
+        // Chamadas de função
+        traco(40)
+        traco(15)
+        let ret = traco(20) // Funções sem return explícito retornam o valor undefined
+        document.write(`ret = ${ret}<br>`)
+
+        /**************************************************
+        FUNÇÕES DETERMINÍSTICAS x NÃO-DETERMINÍSTICAS
+        **************************************************/
+
+        // Função determinística: todas as vezes que a função
+        // é chamada com os mesmos argumentos, ela sempre retorna
+        // o mesmo resultado
+        // Ex.: fatorial(5) sempre irá retornar 120
+
+        // Exemplo de função não-determinística: Math.random()
+        // Gera um número aleatório entre 0 e 1
+        document.write(Math.random() + '<br>')
+        document.write(Math.random() + '<br>')
+        document.write(Math.random() + '<br>')
+
+        // Gerar um número aleatório entre 1 e 60
+        // Math.floor() -> retira as casas decimais
+        let numeroDaSorte = Math.floor(Math.random() * 60 + 1)
+        document.write(Math.floor(Math.random() * 60 + 1) + '<br>')
+
+        /*************************************************
+         PARÂMETROS OPCIONAIS
+         *************************************************/
+        
+        // Uma função pode ter quantos parâmetros opcionais forem
+        // necessários, mas todos eles devem vir APÓS os obrigatórios
+        function potencia(base, expoente = 2 /* valor default */) {
+            return base ** expoente
+        }
+
+        document.write('2 elevado a 5 é ' + potencia(2, 5) + '<br>')
+        document.write('5 elevado a 4 é ' + potencia(5, 4) + '<br>')
+        // Suponnha que, na maioria das vezes que essa função é chamada,
+        // o expoente seja 2
+        document.write('5 elevado a 2 é ' + potencia(5) + '<br>')
+        document.write('7 elevado a 2 é ' + potencia(7) + '<br>')
+        document.write('8 elevado a 2 é ' + potencia(8) + '<br>')
+
+        /********************************************************
+        PARÂMETRO (OU ARGUMENTO) DE RESTO
+        *********************************************************/
+
+        // Suponha uma função que recebe um número arbitrário de
+        // números e retorna a sua soma
+
+        // Só pode existir UM argumento de resto, e caso haja mais
+        // de um argumento, o de resto deve ser o último
+        function somaTudo(...nums) {
+            // O argumento de resto recebe todos parâmetros
+            // passados dentro de um vetor
+            let soma = 0
+            for(let i = 0; i < nums.length; i++) {
+                soma += nums[i]
+            }
+            return soma
+        }
+
+        let result = somaTudo(20, 40, 10, 5 , 9)
+        document.write('Resultado somaTudo (1): ' + result + '<br>')
+        result = somaTudo(1, 4, 8, 9, 0, -3, 8, 14, 7)
+        document.write('Resultado somaTudo (2): ' + result + '<br>')
+
+        function somaTudoAcumulado(inicial, ...nums) {
+            // O argumento de resto recebe todos parâmetros
+            // passados dentro de um vetor
+            let soma = inicial
+            for(let i = 0; i < nums.length; i++) {
+                soma += nums[i]
+            }
+            return soma
+        }
+
+        let abc = somaTudoAcumulado(1000, 2, 8, 0, 3, 7, 10)
+        document.write('somaTudoAcumulado: ' + abc + '<br>')
+
+        /**************************************************
+        EXPRESSÃO DE FUNÇÃO
+        **************************************************/
+
+        // Uma expressão de função é a declaração de uma função
+        // atribuiída a uma variável.
+        // Quando isso ocorre, a função deixa de poder ser chamada
+        // por seu nome e deve ser chamada pelo nome da variável.
+
+        // Função que determina qual de seus dois argumentos é o menor
+        let minimo = function min(a, b) {
+            if(a < b) {
+                return a
+            }
+            else {
+                return b
+            }
+        }
+
+        document.write('Mínimo 5, 7 => ' + minimo(5, 7) + '<br>')
+
+        // Quando uma função é atribuída a uma variável, ela só pode ser 
+        // chamada APÓS a declaração da citada variável. Por isso, a chamada
+        // a seguir não funcionará.
+        // document.write('Mult 7 * 9 => ' + mult(7, 9) + '<br>')
+
+        // Por isso, o mais comum, em expressões de função, é usar
+        // funções anônimas
+        let mult = function(x, y) {
+            return x * y
+        }
+
+        document.write('Mult 7 * 9 => ' + mult(7, 9) + '<br>')
+
+        /****************************************************
+        ARROW FUNCTION
+        *****************************************************/
+        // Expressão de função com as seguintes características
+        // 1) Apenas um argumento
+        // 2) O corpo da função tem apenas uma linha
+        // 3) A função retorna valor
+        let quadrado = function(x) {
+            return x * x
+        }
+
+        // Essa mesma função pode ser escrita com a sintaxe chamada ARROW FUNCTION
+        // 1) A palavra-chave "function" é omitida
+        // 2) Omitem-se os parênteses que envolvem o argumento
+        // 3) Entre o argumento e corpo da função, coloca-se o símbolo =>
+        // 4) O corpo da função vem imediatamente em seguida, sem as chaves e
+        // sem a palavra-chave "return"
+        let quadrado2 = x => x * x
+
+        document.write('Quadrado de 11 => ' + quadrado2(11) + '<br>')
+
+        let subtract = (a, b) => a - b
         
     </script>
 </head>
