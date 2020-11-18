@@ -211,8 +211,46 @@
 
         document.write('Quadrado de 11 => ' + quadrado2(11) + '<br>')
 
+        // Quando temos mais de uma parâmetro, os parênteses em volta dos
+        // argumentos voltam a ser obrigatórios
         let subtract = (a, b) => a - b
+
+        // Quando a função não tem argumentos, os parênteses também
+        // voltam a ser obrigatórios
+
+        // Math.random() -> gera um número aleatório de ponto flutuante entre 0 e 1
+        // Math.floor() -> retirar as casas decimais de um número
+        let aleatorio1a60 = () => Math.floor(Math.random() * 60 + 1)
+
+        document.write('Número para a megasena: ' + aleatorio1a60() + '<br>')
+        document.write('Número para a megasena: ' + aleatorio1a60() + '<br>')
+        document.write('Número para a megasena: ' + aleatorio1a60() + '<br>')
+        document.write('Número para a megasena: ' + aleatorio1a60() + '<br>')
+        document.write('Número para a megasena: ' + aleatorio1a60() + '<br>')
+        document.write('Número para a megasena: ' + aleatorio1a60() + '<br>')
         
+        // Quando a minha função tem mais de uma linha de corpo, voltam
+        // as chaves
+        let eq2grau = (a, b, c) => {
+            let delta = b ** 2 - (4 * a * c)
+            if(delta == 0) {
+                return -b / (2 * a)
+            }
+            else if(delta > 0) {
+                // Math.sqrt() -> calcula a raiz quadrada (square root)
+                let raiz1 = (-b + Math.sqrt(delta)) / 2 * a
+                let raiz2 = (-b - Math.sqrt(delta)) / 2 * a
+                return [raiz1, raiz2] // Retorna um vetor
+            }
+            else { // delta < 0
+                return undefined
+            }
+        }
+
+        document.write(`Eq. 2 grau: a = 1, b = 5, c = 6 => ` + eq2grau(1, 5, 6) + '<br>')
+
+        document.write(`Eq. 2 grau: a = 2, b = 2, c = 4 => ` + eq2grau(2, 2, 4) + '<br>')
+
     </script>
 </head>
 <body>
