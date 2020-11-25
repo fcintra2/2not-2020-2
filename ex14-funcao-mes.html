@@ -5,6 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modelo de documento HTML</title>
+</head>
+
+<body>
+    <h1>Seletor de mês</h1>
+
+    <label>Selecione o número do mês</label>
+    <select id="mes">
+        <option>(Selecione)</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+        <option>11</option>
+        <option>12</option>
+    </select>
+    <div id="resultado"></div>
+
     <script>
         // 'use strict' impede que variáveis sejam declaradas
         // sem o uso de let, var ou const
@@ -27,11 +50,38 @@
             Finalmente, associe a segunda função ao evento 'change' do <select>.
 
         */
+
+        // Captura dos elementos
+        const elMes = document.querySelector('#mes')
+        const elResultado = document.querySelector('#resultado')
+
+        // Declaração da primeira função
+        function nomeMes(numMes) {
+            const meses = [
+                'Janeiro', 'Fevereiro', 'Março', 'Abril',
+                'Maio', 'Junho', 'Julho', 'Agosto',
+                'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+            ]
+            return meses[numMes - 1]
+        }
+
+        // Declaração da segunda função
+        function selecaoMudou() {
+            // Verificar se a seleção é válida
+            if(elMes.selectedIndex === 0) {
+                alert('Selecione um número de mês válido.')
+                elMes.focus()
+            }
+            else {
+                // Chamada à primeira função
+                let nome = nomeMes(elMes.selectedIndex)
+                elResultado.innerText = nome
+            }
+        }
+
+        elMes.addEventListener('change', selecaoMudou)
         
     </script>
-</head>
-
-<body>
 
 </body>
 
