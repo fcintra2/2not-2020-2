@@ -25,6 +25,32 @@
 
             Retorne o resultado.
         */
+
+        function efetuar(oper, ...nums) {
+            let res
+            if(oper) { // booleano, com valor true
+                res = 1     // Elementro neutro da multiplicação
+                for(let n of nums) {    // O argumento de resto é um vetor
+                    res *= n
+                }
+                return res
+            }
+            else {  //false
+                res = 0     // Elemento neutro da adição
+                for(let n of nums) {
+                    res += n
+                }
+                return res
+            }
+        }
+
+        let mult1 = efetuar(true, 4, 8, 2, -1, 9, 3)
+        let mult2 = efetuar(true, 7, 2, 6)
+        document.write(`Multiplicação 1: ${mult1}; multiplicação 2: ${mult2}<br>`)
+
+        let soma1 = efetuar(false, 4, 8, 2, -1, 9, 3)
+        let soma2 = efetuar(false, 7, 2, 6)
+        document.write(`Soma 1: ${soma1}; soma 2: ${soma2}<br>`)
         
     </script>
 </head>

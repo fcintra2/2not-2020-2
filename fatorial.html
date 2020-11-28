@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo de documento HTML</title>
+    <script>
+        // 'use strict' impede que variáveis sejam declaradas
+        // sem o uso de let, var ou const
+        // Inicializar variáveis diretamente é má prática de
+        // programação
+        'use strict'
+        
+        // Números BigInt têm n no final e não se misturam o tipo numérico
+        // comum Number
+        function fatorial(n) {
+            let res = 1n
+            for(let i = n; i > 1; i--) res *= i
+            return res                
+        }
+        alert(fatorial(200n).toLocaleString('pt-BR'))
+        
+        // Sublinhado pode ser usado como separador de milhar
+        let x = 1_200 * 4_000_000
+        alert(x.toLocaleString('pt-BR'))
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

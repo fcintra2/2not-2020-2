@@ -33,6 +33,7 @@
     <div id="resultado"></div>
 
     <div>
+        <!--button id="gerar" onclick="gerarPadrao(); ok()">Gerar padrão</button-->
         <button id="gerar">Gerar padrão</button>
     </div>
 
@@ -62,7 +63,7 @@
         const elCaract = document.querySelector('#caract')
         const elNumLinhas = document.querySelector('#num-linhas')
         const elResultado = document.querySelector('#resultado')
-        const elGerar = document.querySelector('#gerar')
+        const elBotao = document.querySelector('#gerar')
 
         function escreverPadrao(caract, quantLinhas) {
             let padrao = ''
@@ -111,7 +112,22 @@
 
         }
 
-        elGerar.addEventListener('click', gerarPadrao)
+        function ok() {
+            elResultado.innerHTML += '<br><br>Padrão gerado!'
+        }
+
+        function corOn() {
+            elBotao.style.color = 'red'
+        }
+
+        function corOff() {
+            elBotao.style.color = 'black' // Valor original, herdado
+        }
+        
+        elBotao.addEventListener('click', gerarPadrao)
+        elBotao.addEventListener('click', ok)
+        elBotao.addEventListener('mouseover', corOn)
+        elBotao.addEventListener('mouseout', corOff)
         
     </script>
 
