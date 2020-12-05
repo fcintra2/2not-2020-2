@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acumulador</title>
+
+    <style>
+        * {
+            font-family: 'Candara', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        html,
+        body {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            font-size: 12pt;
+            line-height: 18pt;
+            color: #444;
+        }
+
+        body {
+            background-color: indigo;
+            background-image: linear-gradient(slateblue 50%, indigo);
+            background-repeat: no-repeat;
+            padding: 0;
+        }
+
+        body>div {
+            background: whitesmoke;
+            margin: 3%;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+            color: indigo;
+            text-shadow: 2px 2px 2px rgba(75, 0, 130, 0.5);
+
+        }
+
+        div>div {
+            padding: 10px;
+            width: 70%;
+            max-width: 90%;
+            min-width: 250px;
+            margin: 1% auto;
+            text-align: center;
+        }
+
+        div label {
+            display: block;
+        }
+
+        button {
+            font-size: 12pt;
+            padding: 8px;
+            border-radius: 8px;
+            color: white;
+            background-color: indigo;
+        }
+
+        p {
+            display: inline-block;
+            width: 30%;
+            margin: 0;
+        }
+
+        p span {
+            font-weight: bold;
+            color: indigo;
+        }
+
+        div div:last-of-type {
+            background-color: lavender;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <h1>Acumulador</h1>
+
+        <div>
+            <label>Informe um número</label>
+            <input id="num" type="number">
+        </div>
+
+        <div>
+            <button id="acumular">Acumular!</button>
+        </div>
+
+        <div>
+            <p>Quantidade: <span id="quant">0</span></p>
+            <p>Média: <span id="media">0</span></p>
+            <p>Soma: <span id="soma">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        // 'use strict' impede que variáveis sejam declaradas
+        // sem o uso de let, var ou const
+        // Inicializar variáveis diretamente é má prática de
+        // programação
+        'use strict'
+
+        /*
+            3. Com JavaScript, capture todos os elementos da parte HTML que tenham id. 
+            Utilize um dos métodos para capturar metade dos elementos e o outro método 
+            para capturar os demais.
+        */
+        const elNum = document.getElementById('num')
+        const elAcumular = document.getElementById('acumular')
+        const elQuant = document.querySelector('#quant')
+        const elMedia = document.querySelector('#media')
+        const elSoma = document.querySelector('#soma')
+
+        /*
+            4. Declare um vetor vazio
+        */
+        let numeros = []    // Poderia ser: let numeros = Array()
+
+        /*
+            5. Escreva uma expressão de função que receba um vetor de números, 
+            calcule a soma de seus elementos e retorne o resultado. Dentro da função, 
+            utilize um loop for..of para iterar entre os elementos do vetor.
+        */
+        const somaVet = function(vet) {
+            let soma = 0
+            for(let n of vet) {
+                soma += n
+            }
+            return soma
+        }
+
+        /*
+            6. Declare uma função que
+        */
+        function acumular() {
+            /*
+                6a) leia o valor digitado pelo usuário;
+            */
+            let num = parseFloat(elNum.value) // Já converte para número de ponto flutuante
+
+            /*
+                6b) verifique se o valor digitado corresponde ao número válido;
+            */
+            if(isNaN(num)) {
+                alert('Informe um número válido!')
+                elNum.focus()
+            }
+            else {
+                /*
+                    6c) caso tenha passado na validação, insira o número no início 
+                    do vetor declarado no passo 4;
+                */
+                numeros.unshift(num)
+
+                /*
+                    6d) efetue uma chamada à função codificada no passo 5, passando 
+                    a ela o vetor e capturando o retorno em uma variável;
+                */
+                let soma = somaVet(numeros)
+
+                /*
+                    6e) calcule a média, dividindo o resultado obtido na letra d) 
+                    pelo número de elementos do vetor;
+                */
+                let media = soma / numeros.length
+
+                /*
+                    6f) preencha os lugares reservados à quantidade, à média e à 
+                    soma na página, ajustando a propriedade innerText dos respectivos
+                    elementos;
+                */
+                elQuant.innerText = numeros.length
+                elMedia.innerText = media
+                elSoma.innerText = soma
+
+                /*
+                    6g) limpe o valor do campo numérico e coloque o foco nele.
+                */
+                elNum.value = ''
+                elNum.focus()
+            }
+        }
+
+        /*
+            7. Associe a função declarada no passo 6 ao evento clique do botão 
+            existente na página.
+        */
+        elAcumular.addEventListener('click', acumular)
+
+    </script>
+
+</body>
+
+</html>
