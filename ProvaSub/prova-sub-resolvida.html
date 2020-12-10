@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabuada</title>
+
+    <style>
+        * {
+            font-family: 'Candara', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        html,
+        body {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            font-size: 12pt;
+            line-height: 18pt;
+            color: #444;
+        }
+
+        body {
+            background-color: #1b5e20;
+            background-image: linear-gradient(#4caf50 50%, #1b5e20);
+            background-repeat: no-repeat;
+            padding: 0;
+        }
+
+        body>div {
+            background: whitesmoke;
+            margin: 3%;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+            color: #1b5e20;
+            text-shadow: 2px 2px 2px rgba(27, 94, 32, 0.5);
+
+        }
+
+        div>div {
+            padding: 10px;
+            width: 70%;
+            max-width: 90%;
+            min-width: 250px;
+            margin: 1% auto;
+            text-align: center;
+        }
+
+        div label {
+            display: block;
+        }
+
+        button {
+            font-size: 12pt;
+            padding: 8px;
+            border-radius: 8px;
+            color: white;
+            background-color: #1b5e20;
+        }
+
+        p {
+            display: inline-block;
+            width: 30%;
+            margin: 0;
+        }
+
+        p span {
+            font-weight: bold;
+            color: #1b5e20;
+        }
+
+        div div:last-of-type {
+            background-color: #c8e6c9;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <h1>Tabuada</h1>
+
+        <div>
+            <label>Escolha um número para visualizar a tabuada:</label>
+            <select>
+               <option>(Selecione)</option>
+               <option>1</option>
+               <option>2</option>
+               <option>3</option>
+               <option>4</option>
+               <option>5</option>
+               <option>6</option>
+               <option>7</option>
+               <option>8</option>
+               <option>9</option>
+            </select>
+        </div>
+
+        <div>
+            <button>Visualizar!</button>
+        </div>
+
+        <div id="tabuada"></div>
+    </div>
+
+    <script>
+        // 'use strict' impede que variáveis sejam declaradas
+        // sem o uso de let, var ou const
+        // Inicializar variáveis diretamente é má prática de
+        // programação
+        'use strict'
+
+        const multiplicadores = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+
+        /*
+            3. Com JavaScript, faça a captura dos elementos HTML que julgar necessários.
+        */
+        const elNum = document.querySelector('select')
+        const elVisualizar = document.querySelector('button')
+        const elTabuada = document.querySelector('#tabuada')
+
+        /*
+            4. Escreva uma expressão de função que receba um número inteiro e gere a sua tabuada,
+               multiplicando-o por cada elemento do vetor multiplicadores (já existente no código),
+               em um loop for. Esta função deve ainda exibir a tabuada na div reservada para esse 
+               fim, alterando o valor da propriedade innerHTML da div.
+        */
+        const gerarTabuada = function(n) {
+            elTabuada.innerHTML = ''
+            for(let i = multiplicadores.length - 1; i >= 0; i--) {
+                let produto = n * multiplicadores[i]
+                elTabuada.innerHTML += `${n} x ${multiplicadores[i]} = ${produto}<br>`
+            }
+        }
+
+        /*
+            4. Declare uma função que
+        */
+        function visualizar() {
+            let num = elNum.selectedIndex
+
+            /*
+                5a. verifique se o usuário realmente efetuou a seleção de um número válido;
+            */
+            if(num <= 0) {
+                alert('Selecione uma opção válida!')
+                elNum.focus()
+            }
+            else {
+                /*
+                    5b. caso tenha passado na validação, efetue uma chamada à função definida 
+                        no passo 4, passando a ela o número escolhido pelo usuário na lista.
+                */
+                gerarTabuada(num)
+            }
+
+        }
+
+        /*
+            6. Associe a função declarada no passo 5 ao evento clique do botão existente 
+               na página.
+        */
+        elVisualizar.addEventListener('click', visualizar)
+
+    </script>
+
+
+</body>
+
+</html>           
